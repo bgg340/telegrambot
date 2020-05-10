@@ -173,7 +173,9 @@ def echo(update, context):
 
 
 def main():
-    updater = Updater('1210662468:AAFaOGV7y_ThBjh0E6H0Xuy5ts1l5iRsg_M')
+    with open('token.txt', 'r') as file:
+        token_text = file.read()
+    updater = Updater(token_text)
     dp = updater.dispatcher
     dp.add_handler(CommandHandler('bop',bop))
 
