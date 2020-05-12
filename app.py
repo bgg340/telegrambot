@@ -5,6 +5,7 @@ import re
 import logging
 import random 
 import metallum
+import os
 
 # more of the dog thing
 def get_url():
@@ -17,6 +18,12 @@ def bop(bot, update):
     url = get_url()
     chat_id = update.message.chat_id
     bot.send_photo(chat_id=chat_id, photo=url)
+
+# posts condescending face
+def arvasin(bot, update):
+    pic = './images/arvasin.jpg'
+    chat_id = update.message.chat_id
+    bot.send_photo(chat_id=chat_id, photo=open(pic, 'rb'))
 
 #dice math for roller
 def dice(count, side):
@@ -173,18 +180,25 @@ def echo(update, context):
 
 
 def main():
+    #open token from text file so it is not available to everyone on git... AGAIN.
     with open('token.txt', 'r') as file:
         token_text = file.read()
     updater = Updater(token_text)
+    #shortening the updater dispatcher
     dp = updater.dispatcher
+    # all the handlers for the commands.
+    # todo: change some command names
+
     dp.add_handler(CommandHandler('bop',bop))
+
+    dp.add_handler(CommandHandler('arvasin',arvasin))
 
     dp.add_handler(CommandHandler('lol', lol, pass_args=True))
 
     dp.add_handler(CommandHandler('maa', maa, pass_args=True))
-
+    #this was a test and doesn't work
     dp.add_handler(CommandHandler('start', start))
-
+    #attempts at basic echo. still confused why it doesn't work
     dp.add_handler(MessageHandler(Filters.text & (~Filters.command), echo))
 
     updater.start_polling()
