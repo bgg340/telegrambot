@@ -9,7 +9,7 @@ Flask==1.1.2
 future==0.18.2
 idna==2.9
 itsdangerous==1.1.0
-Jinja2==2.11.2
+Jinja2==2.11.3
 lxml==4.5.0
 MarkupSafe==1.1.1
 pycparser==2.20
